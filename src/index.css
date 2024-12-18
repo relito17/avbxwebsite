@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+.hover-scale {
+  @apply transition-transform duration-300 hover:scale-105;
+}
+
+.fade-in {
+  @apply transition-opacity duration-300;
+}
+
+.slide-up {
+  @apply transition-all duration-500 transform;
+}
+
+.slide-up:hover {
+  @apply -translate-y-2;
+}
+
+.form-input {
+  @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500;
+}
