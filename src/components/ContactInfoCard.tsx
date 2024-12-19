@@ -1,9 +1,10 @@
 import { LucideIcon } from 'lucide-react';
+import { ReactNode } from 'react';
 
 interface ContactInfoCardProps {
   icon: LucideIcon;
   title: string;
-  info: string;
+  info: ReactNode;  // Alterado de 'string' para 'ReactNode'
   subInfo?: string;
 }
 

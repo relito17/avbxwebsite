@@ -16,8 +16,9 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} AVBX Projetos. Todos os direitos reservados.
           </p>
           <p className="mt-2 text-sm text-gray-500">
-            Designed by ARxAutomate
-          </p>
+  Designed by <a href="https://iridescent-bublanina-16e72b.netlify.app" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">ARxAutomate</a>
+</p>
+
           <div className="mt-4 text-sm text-gray-400 space-x-4">
             
             <button

@@ -17,8 +17,15 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Localização',
-    info: 'R. António Quadros, 9H\n1600-812 - Lisboa'
-    
+    info: (
+      <a 
+        href="https://www.google.pt/maps/place/AVBX+Projectos/@38.7590057,-9.1777985,17z/data=!3m1!4b1!4m6!3m5!1s0xd1932dbbbbe6839:0x844c8a9eebf74d46!8m2!3d38.7590015!4d-9.1752182!16s%2Fg%2F1tkrn1cj?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" 
+        target="_blank" 
+        rel="noopener noreferrer"
+      >
+        R. António Quadros, 9H<br />1600-812 - Lisboa
+      </a>
+    )
   }
 ];
 
