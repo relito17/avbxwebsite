@@ -16,7 +16,7 @@ export default function Hero() {
             <Building2 className="h-16 w-16 text-blue-500" />
           </div>
           <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            AVBX Projetos
+            AVBX Projetoss
           </h1>
           <p className="mt-6 text-xl text-gray-300 max-w-3xl mx-auto">
             Especialistas em Projetos Eléctricos, ITED e ITUR
