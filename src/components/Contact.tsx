@@ -11,8 +11,8 @@ const contactInfo = [
   {
     icon: Phone,
     title: 'Telefone',
-    info: '+351 965 009 889',
-    subInfo: '(Chamada para rede móvel)'
+    info: '+351 21 550 3366',
+    subInfo: '(Chamada para rede fixa nacional )'
   },
   {
     icon: MapPin,
