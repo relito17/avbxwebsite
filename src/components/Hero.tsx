@@ -1,6 +1,37 @@
+import { useState, useEffect } from 'react';
 import { Building2, ArrowRight, Zap, CheckCircle, Award } from 'lucide-react';
 
 export default function Hero() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Trigger reveal effect after component mounts
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+
+    // Intersection Observer for scroll-based reveals
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    // Observe all reveal elements after initial mount
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    revealElements.forEach((el) => observer.observe(el));
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <div id="home" className="relative bg-gray-900 min-h-screen overflow-hidden">
       {/* Background Image with Enhanced Overlay */}
@@ -27,8 +58,8 @@ export default function Hero() {
         <div className="absolute bottom-20 left-4 sm:bottom-32 sm:left-16 w-2 h-2 sm:w-3 sm:h-3 bg-indigo-400/40 rounded-full animate-bounce delay-2000"></div>
         <div className="absolute top-1/3 left-4 sm:left-20 w-1 h-6 sm:w-2 sm:h-8 bg-blue-300/20 animate-pulse delay-1500"></div>
         
-        {/* Particle system - fewer on mobile */}
-        {[...Array(window.innerWidth < 768 ? 8 : 15)].map((_, i) => (
+        {/* Particle system */}
+        {[...Array(15)].map((_, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 bg-white/20 rounded-full animate-pulse"
@@ -52,8 +83,10 @@ export default function Hero() {
         <div className="w-full">
           <div className="text-center max-w-5xl mx-auto">
             
-            {/* Company Badge - responsive sizing */}
-            <div className="flex justify-center mb-6 sm:mb-8">
+            {/* Company Badge - with reveal effect */}
+            <div className={`flex justify-center mb-6 sm:mb-8 transition-all duration-1000 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
               <div className="inline-flex items-center bg-white/10 backdrop-blur-md rounded-full px-4 py-2 sm:px-6 sm:py-3 border border-white/20 group hover:bg-white/15 transition-all duration-500">
                 <Award className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-400 mr-2 animate-pulse" />
                 <span className="text-white font-medium text-xs sm:text-sm">25+ Anos de Excelência</span>
@@ -61,8 +94,10 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Animated Logo/Icon - responsive sizing */}
-            <div className="flex justify-center items-center mb-8 sm:mb-10 lg:mb-12 group">
+            {/* Animated Logo/Icon - with reveal effect */}
+            <div className={`flex justify-center items-center mb-8 sm:mb-10 lg:mb-12 group transition-all duration-1000 delay-200 ${
+              isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-8 scale-95'
+            }`}>
               <div className="relative">
                 {/* Glowing background */}
                 <div className="absolute inset-0 bg-blue-500 rounded-2xl sm:rounded-3xl blur-xl sm:blur-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500 transform scale-125 sm:scale-150"></div>
@@ -71,8 +106,10 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Main Title with responsive sizing */}
-            <div className="mb-6 sm:mb-8">
+            {/* Main Title with reveal effect */}
+            <div className={`mb-6 sm:mb-8 transition-all duration-1000 delay-300 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight mb-3 sm:mb-4 leading-tight">
                 <span className="bg-gradient-to-r from-white via-blue-100 to-indigo-200 bg-clip-text text-transparent">
                   AVBX
@@ -83,12 +120,16 @@ export default function Hero() {
                 </span>
               </h1>
               
-              {/* Animated underline - responsive width */}
-              <div className="w-20 sm:w-24 lg:w-32 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto mb-6 sm:mb-8 rounded-full animate-pulse"></div>
+              {/* Animated underline - with reveal effect */}
+              <div className={`w-20 sm:w-24 lg:w-32 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto mb-6 sm:mb-8 rounded-full animate-pulse transition-all duration-1000 delay-500 ${
+                isVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
+              }`}></div>
             </div>
 
-            {/* Enhanced Subtitle - responsive text sizing */}
-            <div className="mb-8 sm:mb-10 lg:mb-12 px-4 sm:px-0">
+            {/* Enhanced Subtitle - with reveal effect */}
+            <div className={`mb-8 sm:mb-10 lg:mb-12 px-4 sm:px-0 transition-all duration-1000 delay-600 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white max-w-4xl mx-auto leading-relaxed mb-4 sm:mb-6">
                 Especialistas em <span className="text-blue-400 font-semibold">Projetos Eléctricos</span>, 
                 <span className="text-indigo-400 font-semibold"> ITED</span> e 
@@ -100,8 +141,10 @@ export default function Hero() {
               </p>
             </div>
 
-            {/* Feature Highlights - responsive grid */}
-            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 mb-8 sm:mb-10 lg:mb-12 px-4 sm:px-0">
+            {/* Feature Highlights - with staggered reveal effect */}
+            <div className={`flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 lg:gap-6 mb-8 sm:mb-10 lg:mb-12 px-4 sm:px-0 transition-all duration-1000 delay-700 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
               {[
                 { icon: Zap, text: 'Soluções Inovadoras' },
                 { icon: CheckCircle, text: 'Qualidade Certificada' },
@@ -109,8 +152,13 @@ export default function Hero() {
               ].map((feature, index) => (
                 <div 
                   key={feature.text}
-                  className="flex items-center bg-white/5 backdrop-blur-sm rounded-full px-3 py-2 sm:px-4 sm:py-2 border border-white/10 hover:bg-white/10 transition-all duration-300 transform hover:scale-105"
-                  style={{ animationDelay: `${index * 200}ms` }}
+                  className={`flex items-center bg-white/5 backdrop-blur-sm rounded-full px-3 py-2 sm:px-4 sm:py-2 border border-white/10 hover:bg-white/10 transition-all duration-500 transform hover:scale-105 ${
+                    isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+                  }`}
+                  style={{ 
+                    transitionDelay: `${800 + index * 100}ms`,
+                    animationDelay: `${index * 200}ms` 
+                  }}
                 >
                   <feature.icon className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400 mr-2 flex-shrink-0" />
                   <span className="text-white text-xs sm:text-sm font-medium whitespace-nowrap">{feature.text}</span>
@@ -118,8 +166,10 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* Enhanced CTA Buttons - responsive layout */}
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16 px-4 sm:px-0">
+            {/* Enhanced CTA Buttons - with reveal effect */}
+            <div className={`flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16 px-4 sm:px-0 transition-all duration-1000 delay-1000 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}>
               {/* Primary CTA */}
               <a
                 href="#servicos"
@@ -144,8 +194,10 @@ export default function Hero() {
               </a>
             </div>
 
-            {/* Stats Preview - responsive grid and sizing */}
-            <div className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto px-4 sm:px-0">
+            {/* Stats Preview - with staggered reveal effect */}
+            <div className={`grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-lg sm:max-w-xl lg:max-2xl mx-auto px-4 sm:px-0 transition-all duration-1000 delay-1200 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}>
               {[
                 { number: '25+', label: 'Anos' },
                 { number: '1000+', label: 'Projetos' },
@@ -153,8 +205,13 @@ export default function Hero() {
               ].map((stat, index) => (
                 <div 
                   key={stat.label}
-                  className="text-center group"
-                  style={{ animationDelay: `${index * 300}ms` }}
+                  className={`text-center group transition-all duration-700 ${
+                    isVisible ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'
+                  }`}
+                  style={{ 
+                    transitionDelay: `${1300 + index * 150}ms`,
+                    animationDelay: `${index * 300}ms` 
+                  }}
                 >
                   <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-white group-hover:text-blue-300 transition-colors duration-300">
                     {stat.number}
@@ -166,6 +223,8 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      
     </div>
   );
 }
